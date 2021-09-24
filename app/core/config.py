@@ -11,3 +11,13 @@ JWT_SECRET = '0lwlpxEzgAfGucwZaIRTWOpqnybX2vOvrPbOTwvs'
 database_name = 'helpchildren'
 users_collection_name = 'users'
 roles_collection_name = 'roles'
+
+
+accounts_roles = {
+    0: 'pupil',
+    1: 'volunteer',
+    2: 'sponsor',
+    3: 'mentor',
+    4: 'company',
+    5: 'administration',
+}
