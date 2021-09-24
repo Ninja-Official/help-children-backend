@@ -6,6 +6,7 @@ MONGO_URL = os.getenv('MONGO_URL', 'mongodb://127.0.0.1:27017/')
 API_V1_PREFIX = '/api/v1'
 
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7
+JWT_SECRET = '0lwlpxEzgAfGucwZaIRTWOpqnybX2vOvrPbOTwvs'
 
 database_name = 'helpchildren'
 users_collection_name = 'users'

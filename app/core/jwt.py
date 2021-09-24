@@ -23,7 +23,8 @@ def create_jwt_token(
     data_to_encode = jwt_content.copy()
     expire_at = datetime.utcnow() + expires_delta
     data_to_encode |= JWTMeta(expire=expire_at, subject=JWT_SUBJECT).dict()
-    return jwt.encode(data_to_encode, secret_key, algorithm=JWT_ALGORITHM)
+    encoded = jwt.encode(data_to_encode, secret_key, algorithm=JWT_ALGORITHM)
+    return encoded
 
 
 def create_access_token(user: UserBase, secret_key: str) -> str:
