@@ -24,9 +24,9 @@ async def register_user(
     async with await conn.start_session() as s:
         async with s.start_transaction():
             dbuser = await create_user(conn, user)
-            
+
             token = create_access_token(user, JWT_SECRET)
-            
+
             return UserInResponse(
                 username=dbuser.username,
                 email=dbuser.email,
@@ -36,7 +36,7 @@ async def register_user(
             )
 
 
-@router.get(
+@router.post(
     "/users/login",
     response_model=UserInResponse,
     tags=["authentication"],
@@ -46,6 +46,19 @@ async def login_user(
         user: UserInLogin = Body(...), conn: AsyncIOMotorClient = Depends(get_database)
 ):
     try:
-        user_in_db = await find_user_by_email(email=user.email)
+        dbuser = await find_user_by_email(conn, email=user.email)
     except EntityDoesNotExist:
         raise HTTPException(status_code=404)
+
+    if not dbuser.check_password(user.password):
+        raise HTTPException(HTTP_400_BAD_REQUEST)
+
+    token = create_access_token(UserBase(**dbuser.dict()), JWT_SECRET)
+
+    return UserInResponse(
+        username=dbuser.username,
+        email=dbuser.email,
+        avatar=dbuser.avatar,
+        role_id=dbuser.role_id,
+        token=token,
+    )

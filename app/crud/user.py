@@ -14,6 +14,6 @@ async def create_user(conn: AsyncIOMotorClient, user: UserInCreate) -> UserInDb:
 async def find_user_by_email(conn: AsyncIOMotorClient, email: str) -> UserInDb:
     result = await conn[database_name][users_collection_name].find_one({'email': email})
     if result:
-        return UserInDb(**result.dict())
+        return UserInDb(**result)
     
     raise EntityDoesNotExist()

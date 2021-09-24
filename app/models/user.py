@@ -13,11 +13,11 @@ class UserBase(BaseModel):
 class UserInDb(UserBase):
     password: str
 
-    def encode_password(self, password: str) -> str:
-        return get_password_hash(password)
+    def encode_password(self, passwd: str) -> str:
+        return get_password_hash(passwd)
 
-    def check_password(self, password: str) -> bool:
-        return verify_password(self.password, password)
+    def check_password(self, passwd: str) -> bool:
+        return verify_password(passwd, self.password)
 
 
 class UserInLogin(BaseModel):

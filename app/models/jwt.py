@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class JWTMeta(BaseModel):
-    expire: datetime
+    expire: str
     subject: str
 
 
