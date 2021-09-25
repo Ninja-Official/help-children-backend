@@ -10,6 +10,7 @@ JWT_SECRET = '0lwlpxEzgAfGucwZaIRTWOpqnybX2vOvrPbOTwvs'
 
 database_name = 'helpchildren'
 users_collection_name = 'users'
+pupils_collection_name = 'pupils'
 roles_collection_name = 'roles'
 
 
@@ -19,5 +20,11 @@ accounts_roles = {
     2: 'sponsor',
     3: 'mentor',
     4: 'company',
-    5: 'administration',
+    5: 'orphanage',  # детдом
+    6: 'district_administration',
+    7: 'federal_administration'
+}
+
+event_status = {
+    
 }

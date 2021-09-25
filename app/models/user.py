@@ -4,13 +4,15 @@ from ..core.security import verify_password, get_password_hash
 
 
 class UserBase(BaseModel):
+    """Базовый тип для учётных записей"""
     username: str
-    email: str
+    email: Optional[str] = None
     avatar: Optional[str] = None
     role_id: int
 
 
 class UserInDb(UserBase):
+    id: str
     password: str
 
     def encode_password(self, passwd: str) -> str:
@@ -32,3 +34,8 @@ class UserInCreate(UserInLogin):
 
 class UserInResponse(UserBase):
     token: str
+
+
+class AccountData(BaseModel):
+    username: str
+    password: str
