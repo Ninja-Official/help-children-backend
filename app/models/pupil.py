@@ -7,6 +7,7 @@ class Pupil(BaseModel):
     user_id: str
     orphanage_id: str
     achievements: List[int] = []
+    nickname: Optional[str] = None
     name: Optional[str] = None
     surname: Optional[str] = None
     patronymic: Optional[str] = None
