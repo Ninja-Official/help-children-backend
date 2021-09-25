@@ -12,6 +12,7 @@ async def on_start_application():
 
     regions_path = os.path.join(os.path.abspath(
         os.curdir), 'app/core/data/regions.txt')
+
     with open(regions_path) as f:
         regions_lines = f.read().splitlines()
         regions = []

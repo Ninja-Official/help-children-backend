@@ -3,6 +3,7 @@ from ..database.mongodb import AsyncIOMotorClient
 from ..core.config import database_name, users_collection_name
 from ..models.user import UserInCreate, UserInDb, UserInLogin
 from .exceptions import EntityDoesNotExist
+from bson.objectid import ObjectId
 
 
 async def create_user(conn: AsyncIOMotorClient, user: UserInCreate) -> UserInDb:
@@ -23,6 +24,11 @@ async def find_user_by_email(conn: AsyncIOMotorClient, email: str) -> UserInDb:
 
 async def is_user_exist(conn: AsyncIOMotorClient, username: str) -> bool:
     result = await conn[database_name][users_collection_name].find_one({'username': username})
+    return True if result is not None else False
+
+
+async def is_user_exist(conn: AsyncIOMotorClient, user_id: str) -> bool:
+    result = await conn[database_name][users_collection_name].find_one({'_id': ObjectId(user_id)})
     return True if result is not None else False
 
 

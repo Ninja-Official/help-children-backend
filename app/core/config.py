@@ -13,6 +13,7 @@ users_collection_name = 'users'
 pupils_collection_name = 'pupils'
 roles_collection_name = 'roles'
 regions_collection_name = 'regions'
+events_collection_name = 'events'
 
 
 accounts_roles = {
