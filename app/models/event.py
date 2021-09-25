@@ -14,6 +14,10 @@ class Event(BaseModel):
     location: str
     date: str
 
+class EventImage(BaseModel):
+    event_id: str
+    image_bytes: str
+
 class EventRequestDto(BaseModel):
     name: str
     consumers: str

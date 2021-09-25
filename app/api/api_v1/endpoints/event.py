@@ -50,7 +50,7 @@ async def api_getch_events(
     status_code=HTTP_200_OK,
 )
 async def api_getch_event(
-        event_id: int, conn: AsyncIOMotorClient = Depends(get_database)
+        event_id: str, conn: AsyncIOMotorClient = Depends(get_database)
 ):
     async with await conn.start_session() as s:
         async with s.start_transaction():
