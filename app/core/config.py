@@ -12,6 +12,7 @@ database_name = 'helpchildren'
 users_collection_name = 'users'
 pupils_collection_name = 'pupils'
 roles_collection_name = 'roles'
+regions_collection_name = 'regions'
 
 
 accounts_roles = {
@@ -22,9 +23,13 @@ accounts_roles = {
     4: 'company',
     5: 'orphanage',  # детдом
     6: 'district_administration',
-    7: 'federal_administration'
+    7: 'federal_administration',
 }
 
 event_status = {
-    
+    0: 'finished',
+    1: 'gathering',
+    2: 'pending',
+    3: 'cancelled_by_owner',
+    4: 'cancelled_due_to_funds_shortage',
 }
