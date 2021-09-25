@@ -34,8 +34,7 @@ def generate_username():
 )
 async def create_pupils(
         pupils_data: PupilsInCreate = Body(...), conn: AsyncIOMotorClient = Depends(get_database)):
-    print(pupils_data)
-    print(conn)
+    
     if pupils_data.accounts_count < 1:
         raise HTTPException(HTTP_400_BAD_REQUEST)
 
