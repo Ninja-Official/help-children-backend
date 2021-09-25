@@ -1,7 +1,11 @@
+from starlette.exceptions import HTTPException
 import jwt
+
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from datetime import datetime, timedelta
 from typing import Dict
+from dateutil import parser
 
 from ..models.user import UserBase
 from ..models.jwt import JWTUser, JWTMeta
@@ -43,3 +47,35 @@ def get_username_from_token(token: str, secret_key: str) -> str:
         raise ValueError("JWT token cannot be decrypted") from decode_error
     except ValidationError as validation_error:
         raise ValueError("Malformed payload in token") from validation_error
+
+
+def verify_token(token: str, secret_key: str) -> bool:
+    try:
+        decoded_token = jwt.decode(
+            token, secret_key, algorithms=[JWT_ALGORITHM])
+        expire_at = parser.parse(decoded_token['expire'])
+        return True if expire_at >= datetime.utcnow() else False
+    except jwt.PyJWTError as decode_error:
+        raise ValueError("JWT token cannot be decrypted") from decode_error
+
+
+# class JWTBearer(HTTPBearer):
+#     def __init__(self, auto_error: bool = True):
+#         super(JWTBearer, self).__init__(auto_error=auto_error)
+
+#     async def __call__(self, request: Request):
+#         credentials: HTTPAuthorizationCredentials = await super(JWTBearer, self).__call__(request)
+#         if credentials:
+#             if not credentials.scheme == "Bearer":
+#                 raise HTTPException(
+#                     status_code=403, detail="Invalid authentication scheme.")
+#             if not self.verify_jwt(credentials.credentials):
+#                 raise HTTPException(
+#                     status_code=403, detail="Invalid token or expired token.")
+#             return credentials.credentials
+#         else:
+#             raise HTTPException(
+#                 status_code=403, detail="Invalid authorization code.")
+
+#     def verify_jwt(self, token: str) -> bool:
+#         verify_token(token)

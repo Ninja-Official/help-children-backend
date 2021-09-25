@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.post(
-    "/users/create",
+    "/users/register",
     response_model=UserInResponse,
     tags=["authentication"],
     status_code=HTTP_201_CREATED,
