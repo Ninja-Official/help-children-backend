@@ -1,14 +1,24 @@
 import datetime
+
+from fastapi.datastructures import UploadFile
 from app.models.user import AccountData
 from pydantic import BaseModel
 from typing import List, Optional
 
-
 class Event(BaseModel):
-    region_id: str
+    _id: Optional[str]
     name: str
+    consumers: str
+    resources: str
     description: str
-    status: int
-    created_at: datetime.datetime
-    start_at: datetime.datetime
-    users: List[str] = []
+    location: str
+    date: str
+
+class EventRequestDto(BaseModel):
+    name: str
+    consumers: str
+    resources: str
+    description: str
+    location: str
+    date: str
+    userpics: List[UploadFile]

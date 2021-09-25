@@ -14,7 +14,7 @@ pupils_collection_name = 'pupils'
 roles_collection_name = 'roles'
 regions_collection_name = 'regions'
 events_collection_name = 'events'
-
+events_images_collection_name = 'events_images'
 
 accounts_roles = {
     0: 'pupil',
