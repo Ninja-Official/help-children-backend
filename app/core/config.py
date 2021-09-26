@@ -16,6 +16,7 @@ regions_collection_name = 'regions'
 events_collection_name = 'events'
 chats_collection_name = 'chats'
 events_images_collection_name = 'events_images'
+achievements_collection_name = 'achievements'
 
 accounts_roles = {
     0: 'pupil',
