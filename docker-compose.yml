@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db:
+    image: mongodb
+  web_app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
