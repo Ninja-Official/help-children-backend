@@ -12,11 +12,11 @@ from PIL import Image
 
 async def create_event(conn: AsyncIOMotorClient, event: Event, image: UploadFile) -> Event:
     db = conn[database_name]
-    result = await db[events_collection_name].insert_one(event.dict()) 
-    print(str(image.file.readlines()))
-    print(str(result.inserted_id))
+    result = await db[events_collection_name].insert_one(event.dict())
+    print(image.file.readlines())
+    print(result.inserted_id)
     img = EventImage(event_id=str(result.inserted_id), image_bytes=str(image.file.read()))
-    await db[events_images_collection_name].insert_one(img.dict()) 
+    await db[events_images_collection_name].insert_one(img.dict())
     return event
     
 async def get_event_by_id(conn: AsyncIOMotorClient, event_id: str) -> EventRequestDto:
@@ -30,8 +30,8 @@ async def get_event_by_id(conn: AsyncIOMotorClient, event_id: str) -> EventReque
 
 async def get_events(conn: AsyncIOMotorDatabase, from_id: str, ammount: int) -> List[EventRequestDto]:
     event = await conn[database_name][events_collection_name].find().sort({"event_id":from_id}).limit(ammount)
-    
-    
+
+
     if event:
         return List(**result)
 
