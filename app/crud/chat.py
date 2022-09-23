@@ -6,13 +6,12 @@ from bson.objectid import ObjectId
 
 async def create_chat_room(conn: AsyncIOMotorClient, chat: Chat) -> ChatInDb:
     result = await conn[database_name][chats_collection_name].insert_one(chat.dict())
-    chatdb = ChatInDb(**chat.dict(), id=str(result.inserted_id))
-    return chatdb
+    return ChatInDb(**chat.dict(), id=str(result.inserted_id))
 
 
 async def is_user_in_chat(conn: AsyncIOMotorClient, user_id: str, chat_id: str) -> bool:
     result = await conn[database_name][chats_collection_name].find_one({'_id': ObjectId(chat_id), 'participants': user_id})
-    return True if result is not None else False
+    return result is not None
 
 
 async def add_message(conn: AsyncIOMotorClient, chat_message: ChatMessageInCreate) -> ChatInDb:

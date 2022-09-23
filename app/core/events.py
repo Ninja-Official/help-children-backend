@@ -22,18 +22,19 @@ async def on_start_application():
         regions_lines = f.read().splitlines()
         regions = []
         for region in regions_lines:
-            region_code = int(re.search(r'\d+', region).group(0))
-            region_name = re.search(
-                r'\|.+\|', region).group(0).replace('|', '')
+            region_code = int(re.search(r'\d+', region)[0])
+            region_name = re.search(r'\|.+\|', region)[0].replace('|', '')
+
             regions.append(Region(name=region_name, code=region_code))
         await update_regions(conn, regions)
 
     with open(achievements_path, encoding='utf-8') as json_file:
         json_data = json.load(json_file)
         print(json_data)
-        achievements = []
-        for achievement in json_data['achievements']:
-            achievements.append(Achievement(**achievement))
+        achievements = [
+            Achievement(**achievement)
+            for achievement in json_data['achievements']
+        ]
 
         await update_achievements(conn, achievements)
 

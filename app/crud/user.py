@@ -24,12 +24,12 @@ async def find_user_by_email(conn: AsyncIOMotorClient, email: str) -> UserInDb:
 
 async def is_user_exist(conn: AsyncIOMotorClient, username: str) -> bool:
     result = await conn[database_name][users_collection_name].find_one({'username': username})
-    return True if result is not None else False
+    return result is not None
 
 
 async def is_user_exist(conn: AsyncIOMotorClient, user_id: str) -> bool:
     result = await conn[database_name][users_collection_name].find_one({'_id': ObjectId(user_id)})
-    return True if result is not None else False
+    return result is not None
 
 
 async def find_user_by_username(conn: AsyncIOMotorClient, username: str) -> UserInDb:

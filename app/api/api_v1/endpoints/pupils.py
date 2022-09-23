@@ -17,13 +17,11 @@ router = APIRouter()
 
 def generate_password():
     alphabet = string.ascii_letters + string.digits
-    password = ''.join(secrets.choice(alphabet) for i in range(8))
-    return password
+    return ''.join(secrets.choice(alphabet) for _ in range(8))
 
 
 def generate_username():
-    username = ''.join(secrets.choice(string.ascii_letters) for i in range(6))
-    return username
+    return ''.join(secrets.choice(string.ascii_letters) for _ in range(6))
 
 
 @router.post(
@@ -42,7 +40,7 @@ async def create_pupils(
 
     async with await conn.start_session() as s:
         async with s.start_transaction():
-            for i in range(pupils_data.accounts_count):
+            for _ in range(pupils_data.accounts_count):
                 username_exist = True
 
                 while username_exist:
